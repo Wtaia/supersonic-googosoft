@@ -41,7 +41,7 @@ const responseInterceptor = async (response: Response) => {
   } else {
     try {
       const data: Result<any> = await response?.clone()?.json?.();
-      if (Number(data.code) === 403) {
+      if (Number(data.code) === 403 && !window.location.pathname.includes('external/auth-')) {
         history.push('/login');
         return response;
       }
