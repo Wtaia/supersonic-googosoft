@@ -56,14 +56,15 @@ public class S2CompanyDemo extends S2BaseDemo {
 
     @Override
     protected boolean checkNeedToRun() {
-        List<DomainResp> domainList = domainService.getDomainList();
-        for (DomainResp domainResp : domainList) {
-            if (domainResp.getBizName().equalsIgnoreCase("corporate")) {
-                log.info("Already exist domain:corporate, no need to run demo");
-                return false;
-            }
-        }
-        return true;
+        return false;
+//        List<DomainResp> domainList = domainService.getDomainList();
+//        for (DomainResp domainResp : domainList) {
+//            if (domainResp.getBizName().equalsIgnoreCase("corporate")) {
+//                log.info("Already exist domain:corporate, no need to run demo");
+//                return false;
+//            }
+//        }
+//        return true;
     }
 
     public DomainResp addDomain() {

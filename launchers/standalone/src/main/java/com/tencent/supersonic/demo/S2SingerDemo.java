@@ -60,14 +60,15 @@ public class S2SingerDemo extends S2BaseDemo {
 
     @Override
     protected boolean checkNeedToRun() {
-        List<DomainResp> domainList = domainService.getDomainList();
-        for (DomainResp domainResp : domainList) {
-            if (domainResp.getBizName().equalsIgnoreCase("singer")) {
-                log.info("Already exist domain:singer, no need to run demo");
-                return false;
-            }
-        }
-        return true;
+        return false;
+//        List<DomainResp> domainList = domainService.getDomainList();
+//        for (DomainResp domainResp : domainList) {
+//            if (domainResp.getBizName().equalsIgnoreCase("singer")) {
+//                log.info("Already exist domain:singer, no need to run demo");
+//                return false;
+//            }
+//        }
+//        return true;
     }
 
     public DomainResp addDomain() {

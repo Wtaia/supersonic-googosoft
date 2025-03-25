@@ -90,14 +90,15 @@ public class S2VisitsDemo extends S2BaseDemo {
 
     @Override
     public boolean checkNeedToRun() {
-        List<DomainResp> domainList = domainService.getDomainList();
-        for (DomainResp domainResp : domainList) {
-            if (domainResp.getBizName().equalsIgnoreCase("supersonic")) {
-                log.info("Already exist domain:supersonic, no need to run demo");
-                return false;
-            }
-        }
-        return true;
+        return false;
+//        List<DomainResp> domainList = domainService.getDomainList();
+//        for (DomainResp domainResp : domainList) {
+//            if (domainResp.getBizName().equalsIgnoreCase("supersonic")) {
+//                log.info("Already exist domain:supersonic, no need to run demo");
+//                return false;
+//            }
+//        }
+//        return true;
     }
 
     private void addSampleChats(Integer agentId) {
