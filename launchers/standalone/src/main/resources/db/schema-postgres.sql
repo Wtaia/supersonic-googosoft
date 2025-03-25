@@ -213,7 +213,9 @@ CREATE TABLE IF NOT EXISTS s2_dimension (
     default_values varchar(500) DEFAULT NULL,
     dim_value_maps varchar(5000) DEFAULT NULL,
     is_tag smallint DEFAULT NULL,
-    ext varchar(1000) DEFAULT NULL
+    ext varchar(1000) DEFAULT NULL,
+    dimension_id varchar(1000) DEFAULT NULL,
+    model_id_char varchar(1000) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS s2_domain (
@@ -255,7 +257,9 @@ CREATE TABLE IF NOT EXISTS s2_metric (
     relate_dimensions varchar(500) DEFAULT NULL,
     ext text DEFAULT NULL,
     define_type varchar(50) DEFAULT NULL,
-    is_publish smallint DEFAULT NULL
+    is_publish smallint DEFAULT NULL,
+    metric_id varchar(1000) DEFAULT NULL,
+    model_id_char varchar(1000) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS s2_model (
@@ -283,7 +287,8 @@ CREATE TABLE IF NOT EXISTS s2_model (
     depends varchar(500) DEFAULT NULL,
     filter_sql varchar(1000) DEFAULT NULL,
     tag_object_id integer DEFAULT 0,
-    ext varchar(1000) DEFAULT NULL
+    ext varchar(1000) DEFAULT NULL,
+    model_id varchar(1000) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS s2_data_set (
@@ -373,8 +378,7 @@ CREATE TABLE IF NOT EXISTS s2_user_token (
     create_by VARCHAR(255) NOT NULL,
     update_time TIMESTAMP default NULL,
     update_by VARCHAR(255) NOT NULL,
-    expire_date_time TIMESTAMP NOT NULL,
-    UNIQUE (name, user_name)
+    expire_date_time TIMESTAMP NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS s2_app (
