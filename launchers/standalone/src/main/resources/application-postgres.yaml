@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${S2_DB_HOST:172.20.228.77}:${S2_DB_PORT:8003},${S2_DB_HOST2:172.20.228.77}:${S2_DB_PORT2:8004},${S2_DB_HOST3:172.20.228.77}:${S2_DB_PORT3:8005}/${S2_DB_DATABASE:xzzc0824}?batchMode=on
+    url: jdbc:postgresql://${S2_DB_HOST:172.20.228.77}:${S2_DB_PORT:8003},${S2_DB_HOST2:172.20.228.77}:${S2_DB_PORT2:8004},${S2_DB_HOST3:172.20.228.77}:${S2_DB_PORT3:8005}/${S2_DB_DATABASE:xzzc0824}?batchMode=on&stringtype=unspecified
     username: ${S2_DB_USER:ywjm}
     password: ${S2_DB_PASSWORD:ywjm0228@}
   sql:
@@ -11,4 +11,4 @@ spring:
       username: ${S2_DB_USER:ywjm}
       password: ${S2_DB_PASSWORD:ywjm0228@}
       schema-locations: classpath:db/schema-postgres.sql
-      data-locations: classpath:db/data-postgres.sql, classpath:db/schema-gauss-sync.sql
+      data-locations: classpath:db/data-postgres.sql

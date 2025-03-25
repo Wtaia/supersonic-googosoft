@@ -103,7 +103,7 @@ public abstract class S2BaseDemo implements CommandLineRunner {
 
     public void run(String... args) {
         demoDatabase = addDatabaseIfNotExist();
-        demoChatModel = addChatModelIfNotExist();
+//        demoChatModel = addChatModelIfNotExist();
         if (demoList != null && demoList.contains(getClass().getSimpleName())) {
             if (checkNeedToRun()) {
                 doRun();
