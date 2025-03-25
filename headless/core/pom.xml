@@ -137,6 +137,11 @@
             <groupId>org.jgrapht</groupId>
             <artifactId>jgrapht-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.huaweicloud.dws</groupId>
+            <artifactId>huaweicloud-dws-jdbc</artifactId>
+            <version>${gaussdb.connector.java.version}</version>
+        </dependency>
     </dependencies>
 
 

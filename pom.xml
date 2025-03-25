@@ -83,6 +83,7 @@
         <stax2.version>4.2.1</stax2.version>
         <aws-java-sdk.version>1.12.780</aws-java-sdk.version>
         <jgrapht.version>1.5.2</jgrapht.version>
+        <gaussdb.connector.java.version>8.5.0.101</gaussdb.connector.java.version>
     </properties>
 
     <dependencyManagement>
@@ -241,6 +242,11 @@
                 <groupId>org.jgrapht</groupId>
                 <artifactId>jgrapht-core</artifactId>
                 <version>${jgrapht.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.huaweicloud.dws</groupId>
+                <artifactId>huaweicloud-dws-jdbc</artifactId>
+                <version>${gaussdb.connector.java.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
