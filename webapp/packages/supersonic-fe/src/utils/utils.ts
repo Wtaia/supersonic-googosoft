@@ -251,7 +251,7 @@ export const getTextWidth = (
   text: string,
   fontSize: string = '16px',
   fontWeight: string = 'normal',
-  fontFamily: string = 'DINPro Medium',
+  fontFamily: string = 'HarmonyOS_Sans_SC_Medium',
 ): number => {
   const canvas = utilCanvas || (utilCanvas = document.createElement('canvas'));
   const context = canvas.getContext('2d');
