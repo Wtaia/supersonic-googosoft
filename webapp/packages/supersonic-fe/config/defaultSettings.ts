@@ -13,7 +13,7 @@ const Settings: ProLayoutProps & {
   colorWeak: false,
   title: '',
   pwa: false,
-  iconfontUrl: '//at.alicdn.com/t/c/font_4120566_x5c4www9bqm.js',
+  iconfontUrl: `/webapp/font_4120566_x5c4www9bqm.js`,
   // splitMenus: true,
   // menu: {
   //   autoClose: false,
