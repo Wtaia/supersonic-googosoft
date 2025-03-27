@@ -15,6 +15,8 @@ export { request } from './services/request';
 import { BASE_TITLE } from '@/common/constants';
 import { ROUTE_AUTH_CODES } from '../config/routes';
 import AppPage from './pages/index';
+import { PieChartOutlined } from "@ant-design/icons";
+import {size} from "lodash";
 
 const replaceRoute = '/';
 
@@ -124,18 +126,19 @@ export const layout: RunTimeLayoutConfig = (params) => {
     },
     logo: (
       <Space>
-        <S2Icon
-          icon={ICON.iconlogobiaoshi}
-          size={30}
-          color="#1672fa"
-          style={{ display: 'inline-block', marginTop: 8 }}
-        />
-        <div className="logo" style={{ position: 'relative', top: '-2px' }}>
-          SuperSonic
-        </div>
+        {/*<S2Icon*/}
+        {/*  icon={ICON.iconchaoyinshuxitonglogo}*/}
+        {/*  size={30}*/}
+        {/*  color="#1672fa"*/}
+        {/*  style={{ display: 'inline-block', marginTop: 8 }}*/}
+        {/*/>*/}
+        <img src={"/webapp/fo-sd4.png"} style={{ display: 'inline-block', height: 55}} alt="数字财政问数"/>
+        {/*<div className="logo" style={{position: 'relative', top: '-2px'}}>*/}
+        {/*  SuperSonic*/}
+        {/*</div>*/}
       </Space>
     ),
-    contentStyle: { ...(initialState?.contentStyle || {}) },
+    contentStyle: {...(initialState?.contentStyle || {}) },
     rightContentRender: () => <RightContent />,
     disableContentMargin: true,
     // menuHeaderRender: undefined,
