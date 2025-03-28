@@ -21,7 +21,7 @@ const AgentList: React.FC<Props> = ({ agentList, currentAgent, onSelectAgent }) 
     <div className={styles.agentList}>
       <div className={styles.header}>
         <div className={styles.headerTitle}>智能助理</div>
-        <PlusCircleOutlined className={styles.plusIcon} onClick={onAddAgent} />
+        {/*<PlusCircleOutlined className={styles.plusIcon} onClick={onAddAgent} />*/}
       </div>
       <div className={styles.agentListContent}>
         {agentList.map((agent, index) => {
