@@ -7,7 +7,7 @@ spring:
   sql:
     init:
       continue-on-error: true
-      mode: always
+      mode: never
       username: ${S2_DB_USER:ywjm}
       password: ${S2_DB_PASSWORD:ywjm0228@}
       schema-locations: classpath:db/schema-postgres.sql

@@ -93,13 +93,14 @@ const LoginPage: React.FC = () => {
               <div className={styles.loginMain}>
                 <h3 className={styles.title}>
                   <Space>
-                    <S2Icon
-                      icon={ICON.iconlogobiaoshi}
-                      size={30}
-                      color="#296DF3"
-                      style={{ display: 'inline-block', marginTop: 8 }}
-                    />
-                    <div>SuperSonic</div>
+                    {/*<S2Icon*/}
+                    {/*  icon={ICON.iconlogobiaoshi}*/}
+                    {/*  size={30}*/}
+                    {/*  color="#296DF3"*/}
+                    {/*  style={{ display: 'inline-block', marginTop: 8 }}*/}
+                    {/*/>*/}
+                    <img src={"/webapp/fo-sd4.png"} style={{ display: 'inline-block', height: 55}} alt="智能问数"/>
+                    <div>智能问数</div>
                   </Space>
                 </h3>
                 <Item name="name" rules={[{ required: true }]} label="">

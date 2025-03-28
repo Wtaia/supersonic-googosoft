@@ -29,7 +29,7 @@ const DatabaseCreateForm: ForwardRefRenderFunction<any, Props> = (
   { domainId, databaseId, onSubmit, hideSubmitBtn = false },
   ref,
 ) => {
-  const encryptKey = CryptoJS.enc.Utf8.parse('supersonic@2024');
+  const encryptKey = CryptoJS.enc.Utf8.parse('智能问数@2024');
   const [form] = Form.useForm();
   const [selectedDbType, setSelectedDbType] = useState<string>('');
   const [databaseOptions, setDatabaseOptions] = useState<{ value: string; label: string }[]>([]);

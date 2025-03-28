@@ -101,7 +101,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Supersonic',
+  title: '智能问数',
   layout: {
     locale: true,
     ...defaultSettings,
