@@ -23,7 +23,11 @@ const Agent = () => {
 
   const updateData = async () => {
     setLoading(true);
-    const res = await getAgentList();
+    let res = await getAgentList();
+    if (res.code != 200) {
+      await new Promise(res => setTimeout(res,1000));
+      res = await getAgentList();
+    }
     setLoading(false);
     setAgents(res.data || []);
   };
