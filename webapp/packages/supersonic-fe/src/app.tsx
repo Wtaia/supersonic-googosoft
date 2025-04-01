@@ -56,7 +56,13 @@ export async function getInitialState(): Promise<{
       if (code === 200) {
         return { ...data, staffName: data.staffName || data.name };
       }
-    } catch (error) {}
+    } catch (error) {
+      await new Promise(res => setTimeout(res,1000));
+      const { code, data } = await queryCurrentUser();
+      if (code === 200) {
+        return { ...data, staffName: data.staffName || data.name };
+      }
+    }
     return undefined;
   };
 
