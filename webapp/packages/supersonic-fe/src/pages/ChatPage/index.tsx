@@ -23,16 +23,18 @@ const ChatPage = () => {
     let paths = window.location.pathname.split('/');
     let path = paths[paths.length - 1];
     if (path.includes('auth-')) {
-      const fetchToken = async () => {
-        try {
-          // let newVar = await postUserLogin({ authKey: path.substring(path.indexOf('-') + 1) });
-          localStorage.setItem(AUTH_TOKEN_KEY, publicKey);
-          setToken(publicKey);
-        } catch (error) {
-          console.error("Error during login request:", error);
-        }
-      };
-      fetchToken();
+      // const fetchToken = async () => {
+      //   try {
+      //     let newVar = await postUserLogin({ authKey: path.substring(path.indexOf('-') + 1) });
+      //     localStorage.setItem(AUTH_TOKEN_KEY, newVar);
+      //     setToken(newVar);
+      //   } catch (error) {
+      //     console.error("Error during login request:", error);
+      //   }
+      // };
+      // fetchToken();
+      localStorage.setItem(AUTH_TOKEN_KEY, publicKey);
+      setToken(publicKey);
     }
   }, [location]);
 
