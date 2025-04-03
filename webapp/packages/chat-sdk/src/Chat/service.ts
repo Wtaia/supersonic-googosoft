@@ -2,7 +2,7 @@ import axios from '../service/axiosInstance';
 import { isMobile } from '../utils/utils';
 import { AgentType, ModelType } from './type';
 
-const prefix = isMobile ? '/openapi' : '/api';
+const prefix = isMobile ? '/webapp/openapi' : '/webapp/api';
 
 export function saveConversation(chatName: string, agentId: number) {
   return axios.post<any>(`${prefix}/chat/manage/save?chatName=${chatName}&agentId=${agentId}`);

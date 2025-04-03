@@ -2,30 +2,30 @@ import { request } from 'umi';
 import { AgentType, MemoryType, MetricType, ModelType } from './type';
 
 export function getAgentList() {
-  return request<Result<AgentType[]>>('/api/chat/agent/getAgentList');
+  return request<Result<AgentType[]>>('/webapp/api/chat/agent/getAgentList');
 }
 
 export function saveAgent(agent: AgentType) {
-  return request<Result<any>>('/api/chat/agent', {
+  return request<Result<any>>('/webapp/api/chat/agent', {
     method: agent?.id ? 'PUT' : 'POST',
     data: { ...agent, status: agent.status !== undefined ? agent.status : 1 },
   });
 }
 
 export function deleteAgent(id: number) {
-  return request<Result<any>>(`/api/chat/agent/${id}`, {
+  return request<Result<any>>(`/webapp/api/chat/agent/${id}`, {
     method: 'DELETE',
   });
 }
 
 export function getModelList() {
-  return request<Result<ModelType[]>>('/api/chat/conf/getDomainDataSetTree', {
+  return request<Result<ModelType[]>>('/webapp/api/chat/conf/getDomainDataSetTree', {
     method: 'GET',
   });
 }
 
 export function getMetricList(modelId: number) {
-  return request<Result<{ list: MetricType[] }>>('/api/semantic/metric/queryMetric', {
+  return request<Result<{ list: MetricType[] }>>('/webapp/api/semantic/metric/queryMetric', {
     method: 'POST',
     data: {
       modelIds: [modelId],
@@ -42,7 +42,7 @@ export function getMemeoryList(data: {
   pageSize: number;
 }) {
   const { agentId, chatMemoryFilter, current, pageSize } = data;
-  return request<Result<{ list: MetricType[] }>>('/api/chat/memory/pageMemories', {
+  return request<Result<{ list: MetricType[] }>>('/webapp/api/chat/memory/pageMemories', {
     method: 'POST',
     data: {
       ...data,
@@ -56,14 +56,14 @@ export function getMemeoryList(data: {
 }
 
 export function saveMemory(data: MemoryType) {
-  return request<Result<string>>('/api/chat/memory/updateMemory', {
+  return request<Result<string>>('/webapp/api/chat/memory/updateMemory', {
     method: 'POST',
     data,
   });
 }
 
 export function batchDeleteMemory(ids: number[]) {
-  return request<Result<string>>('/api/chat/memory/batchDelete', {
+  return request<Result<string>>('/webapp/api/chat/memory/batchDelete', {
     method: 'POST',
     data: { ids },
   });

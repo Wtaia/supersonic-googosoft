@@ -15,9 +15,9 @@ export default defineConfig({
     // 'process.env.REACT_APP_ENV': process.env.REACT_APP_ENV, // * REACT_APP_ENV 本地开发环境：dev，测试服：test，正式服：prod
     'process.env': {
       ...process.env,
-      API_BASE_URL: '/api/semantic/', // 直接在define中挂载裸露的全局变量还需要配置eslint，ts相关配置才能导致在使用中不会飘红，冗余较高，这里挂在进程环境下
-      CHAT_API_BASE_URL: '/api/chat/',
-      AUTH_API_BASE_URL: '/api/auth/',
+      API_BASE_URL: '/webapp/api/semantic/', // 直接在define中挂载裸露的全局变量还需要配置eslint，ts相关配置才能导致在使用中不会飘红，冗余较高，这里挂在进程环境下
+      CHAT_API_BASE_URL: '/webapp/api/chat/',
+      AUTH_API_BASE_URL: '/webapp/api/auth/',
       SHOW_TAG: false,
       ...ENV_CONFIG,
     },
