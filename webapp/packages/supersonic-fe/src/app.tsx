@@ -138,7 +138,7 @@ export const layout: RunTimeLayoutConfig = (params) => {
         {/*  color="#1672fa"*/}
         {/*  style={{ display: 'inline-block', marginTop: 8 }}*/}
         {/*/>*/}
-        <img src={"/webapp/fo-sd4.png"} style={{ display: 'inline-block', height: 55}} alt="智能问数"/>
+        {/*<img src={"/webapp/fo-sd4.png"} style={{ display: 'inline-block', height: 55}} alt="智能问数"/>*/}
         {/*<div className="logo" style={{position: 'relative', top: '-2px'}}>*/}
         {/*  SuperSonic*/}
         {/*</div>*/}

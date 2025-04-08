@@ -20,6 +20,7 @@ const { RangePicker } = DatePicker;
 
 type Props = {
   parseLoading: boolean;
+  loadingMsg: string;
   parseInfoOptions: ChatContextType[];
   parseTip: string;
   currentParseInfo?: ChatContextType;
@@ -45,6 +46,7 @@ type RangeKeys = '近7日' | '近14日' | '近30日' | '本周' | '本月' | '�
 const ParseTip: React.FC<Props> = ({
   isSimpleMode = false,
   parseLoading,
+  loadingMsg,
   parseInfoOptions,
   parseTip,
   currentParseInfo,
@@ -106,7 +108,7 @@ const ParseTip: React.FC<Props> = ({
   };
 
   if (parseLoading) {
-    return getNode('意图解析中');
+    return getNode(loadingMsg);
   }
 
   if (parseTip) {

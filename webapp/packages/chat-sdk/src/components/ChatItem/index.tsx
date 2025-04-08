@@ -82,6 +82,7 @@ const ChatItem: React.FC<Props> = ({
   onSendMsg,
 }) => {
   const [parseLoading, setParseLoading] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState('');
   const [parseTimeCost, setParseTimeCost] = useState<ParseTimeCostType>();
   const [parseInfo, setParseInfo] = useState<ChatContextType>();
   const [parseInfoOptions, setParseInfoOptions] = useState<ChatContextType[]>([]);
@@ -208,6 +209,7 @@ const ChatItem: React.FC<Props> = ({
   };
 
   const sendMsg = async () => {
+    setLoadingMsg(msg);
     setParseLoading(true);
     const parseData: any = await chatParse({
       queryText: msg,
@@ -476,6 +478,7 @@ const ChatItem: React.FC<Props> = ({
                 <ParseTip
                   isSimpleMode={isSimpleMode}
                   parseLoading={parseLoading}
+                  loadingMsg={loadingMsg}
                   parseInfoOptions={parseInfoOptions}
                   parseTip={parseTip}
                   currentParseInfo={parseInfo}

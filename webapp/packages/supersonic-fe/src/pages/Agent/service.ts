@@ -76,7 +76,7 @@ export function getToolTypes(): Promise<any> {
 }
 
 export function createMemory(data: any) {
-  return request<Result<string>>('/api/chat/memory/createMemory', {
+  return request<Result<string>>('/webapp/api/chat/memory/createMemory', {
     method: 'POST',
     data,
   });
