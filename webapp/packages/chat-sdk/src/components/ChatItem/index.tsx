@@ -209,7 +209,8 @@ const ChatItem: React.FC<Props> = ({
   };
 
   const sendMsg = async () => {
-    setLoadingMsg(msg);
+    // setLoadingMsg('意图解析： ' + msg + '<br>' + '当前会话编号： ' + conversationId + '<br>' + '匹配模型编号' + modelId + '<br>' + '匹配代理编号' + agentId + '<br>');
+    setLoadingMsg('好的，我现在需要处理用户的查询，将自然语言的问题转换为SQL查询。首先用户的问题是“' + msg + '”' + '当前会话编号为“' + conversationId + '”。接下来匹配模型编号为“' + modelId + '”，' + '匹配代理编号为“' + agentId + '”。正在生成查询');
     setParseLoading(true);
     const parseData: any = await chatParse({
       queryText: msg,

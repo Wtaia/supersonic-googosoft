@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import { ChatContextType, DateInfoType, EntityInfoType, FilterItemType } from '../../common/type';
 import { Button, DatePicker, Row, Col } from 'antd';
 import { CheckCircleFilled, CloseCircleFilled, ReloadOutlined } from '@ant-design/icons';
@@ -78,6 +78,25 @@ const ParseTip: React.FC<Props> = ({
     本年: [dayjs().startOf('year'), dayjs().endOf('year')],
   };
 
+  const [renderedTitle, setRenderedTitle] = useState('');
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (index < loadingMsg.length) {
+      const randomInterval = [100, 200, 150][Math.floor(Math.random() * 3)];
+      const timeout = setTimeout(() => {
+        setRenderedTitle((prev) => prev + loadingMsg[index]);
+        setIndex(index + 1);
+      }, randomInterval);
+      return () => clearTimeout(timeout);
+    }
+  }, [index, loadingMsg]);
+
+  useEffect(() => {
+    setRenderedTitle('');
+    setIndex(0);
+  }, [parseLoading]);
+
   const getNode = (tipTitle: ReactNode, tipNode?: ReactNode, failed?: boolean) => {
     return (
       <div className={`${prefixCls}-parse-tip`}>
@@ -108,7 +127,7 @@ const ParseTip: React.FC<Props> = ({
   };
 
   if (parseLoading) {
-    return getNode(loadingMsg);
+    return getNode(<div dangerouslySetInnerHTML={{ __html: renderedTitle }} />);
   }
 
   if (parseTip) {
