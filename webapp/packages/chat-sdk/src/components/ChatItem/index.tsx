@@ -210,21 +210,23 @@ const ChatItem: React.FC<Props> = ({
 
   const sendMsg = async () => {
     // setLoadingMsg('意图解析： ' + msg + '<br>' + '当前会话编号： ' + conversationId + '<br>' + '匹配模型编号' + modelId + '<br>' + '匹配代理编号' + agentId + '<br>');
-    setLoadingMsg('好的，我现在需要处理用户的查询，将自然语言的问题转换为SQL查询。首先用户的问题是“' + msg + '”' + '当前会话编号为“' + conversationId + '”。接下来匹配模型编号为“' + modelId + '”，' + '匹配代理编号为“' + agentId + '”。正在生成查询');
+    setLoadingMsg('好的，我现在需要处理用户的查询，将自然语言的问题转换为SQL查询。首先用户的问题是“' + msg + '”，' + '当前会话编号为：“' + conversationId + '”。接下来匹配模型编号为：“' + modelId + '”，' + '匹配代理编号为“' + agentId + '”。正在生成查询');
     setParseLoading(true);
-    const parseData: any = await chatParse({
-      queryText: msg,
-      chatId: conversationId,
-      modelId,
-      agentId,
-      filters: filter,
-    }).finally(() => {
+    let parseData: any;
+    try {
+      parseData = await chatParse({
+        queryText: msg,
+        chatId: conversationId,
+        modelId,
+        agentId,
+        filters: filter,
+      });
+    }catch (e) {
       setParseLoading(false);
-      setParseTip(state === ParseStateEnum.FAILED && errorMsg ? errorMsg : PARSE_ERROR_TIP);
-      setParseInfo({ queryId } as any);
+      setParseTip( PARSE_ERROR_TIP);
       return;
-    });
-    // setParseLoading(false);
+    }
+    setParseLoading(false);
     const { code, data } = parseData || {};
     const { state, selectedParses, candidateParses, queryId, parseTimeCost, errorMsg } = data || {};
     const parses = selectedParses?.concat(candidateParses || []) || [];
@@ -557,23 +559,23 @@ const ChatItem: React.FC<Props> = ({
                   onSelectQuestion={onSelectQuestion}
                 />
               )}
+            {(parseTip !== '' || (executeMode && !executeLoading)) &&
+                parseInfo?.queryMode !== 'PLAIN_TEXT' && (
+                    <Tools
+                        isLastMessage={isLastMessage}
+                        queryId={parseInfo?.queryId || 0}
+                        scoreValue={score}
+                        isParserError={isParserError}
+                        onExportData={() => {
+                          onExportData();
+                        }}
+                        isSimpleMode={isSimpleMode}
+                        onReExecute={queryId => {
+                          deleteQueryInfo(queryId);
+                        }}
+                    />
+                )}
           </div>
-          {(parseTip !== '' || (executeMode && !executeLoading)) &&
-            parseInfo?.queryMode !== 'PLAIN_TEXT' && (
-              <Tools
-                isLastMessage={isLastMessage}
-                queryId={parseInfo?.queryId || 0}
-                scoreValue={score}
-                isParserError={isParserError}
-                onExportData={() => {
-                  onExportData();
-                }}
-                isSimpleMode={isSimpleMode}
-                onReExecute={queryId => {
-                  deleteQueryInfo(queryId);
-                }}
-              />
-            )}
         </div>
       </div>
     </ChartItemContext.Provider>
