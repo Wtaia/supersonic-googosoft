@@ -218,8 +218,13 @@ const ChatItem: React.FC<Props> = ({
       modelId,
       agentId,
       filters: filter,
+    }).finally(() => {
+      setParseLoading(false);
+      setParseTip(state === ParseStateEnum.FAILED && errorMsg ? errorMsg : PARSE_ERROR_TIP);
+      setParseInfo({ queryId } as any);
+      return;
     });
-    setParseLoading(false);
+    // setParseLoading(false);
     const { code, data } = parseData || {};
     const { state, selectedParses, candidateParses, queryId, parseTimeCost, errorMsg } = data || {};
     const parses = selectedParses?.concat(candidateParses || []) || [];
