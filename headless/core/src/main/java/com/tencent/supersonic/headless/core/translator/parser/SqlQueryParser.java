@@ -47,7 +47,7 @@ public class SqlQueryParser implements QueryParser {
         SqlQuery sqlQuery = queryStatement.getSqlQuery();
         List<String> queryFields = SqlSelectHelper.getAllSelectFields(sqlQuery.getSql());
         Set<String> queryAliases = SqlSelectHelper.getAliasFields(sqlQuery.getSql());
-        queryFields.removeAll(queryAliases);
+//        queryFields.removeAll(queryAliases);
         Ontology ontology = queryStatement.getOntology();
         OntologyQuery ontologyQuery = buildOntologyQuery(ontology, queryFields);
         // check if there are fields not matched with any metric or dimension

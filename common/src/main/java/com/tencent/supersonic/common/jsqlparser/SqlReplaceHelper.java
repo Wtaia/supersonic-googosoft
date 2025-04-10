@@ -147,8 +147,8 @@ public class SqlReplaceHelper {
             boolean exactReplace) {
         Select selectStatement = SqlSelectHelper.getSelect(sql);
         // alias field should not be replaced
-        Set<String> aliases = SqlSelectHelper.getAliasFields(sql);
-        aliases.forEach(alias -> fieldNameMap.put(alias, alias));
+//        Set<String> aliases = SqlSelectHelper.getAliasFields(sql);
+//        aliases.forEach(alias -> fieldNameMap.put(alias, alias));
 
         Set<Select> plainSelectList = SqlSelectHelper.getAllSelect(selectStatement);
         for (Select plainSelect : plainSelectList) {

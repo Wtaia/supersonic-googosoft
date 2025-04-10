@@ -63,7 +63,7 @@ public class ChatQueryRepositoryImpl implements ChatQueryRepository {
             queryWrapper.lambda().in(ChatQueryDO::getQuestionId, pageQueryInfoReq.getIds());
         }
         queryWrapper.lambda().isNotNull(ChatQueryDO::getQueryResult);
-        queryWrapper.lambda().ne(ChatQueryDO::getQueryResult, "");
+//        queryWrapper.lambda().ne(ChatQueryDO::getQueryResult, "");
         queryWrapper.lambda().orderByDesc(ChatQueryDO::getQuestionId);
         queryWrapper.lambda().eq(ChatQueryDO::getQueryState, 1);
 
