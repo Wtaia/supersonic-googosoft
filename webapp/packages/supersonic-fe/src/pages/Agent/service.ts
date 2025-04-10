@@ -2,30 +2,30 @@ import { request } from 'umi';
 import { AgentType, MemoryType, MetricType, ModelType } from './type';
 
 export function getAgentList() {
-  return request<Result<AgentType[]>>('/webapp/api/chat/agent/getAgentList');
+  return request<Result<AgentType[]>>(`${process.env.CHAT_API_BASE_URL}agent/getAgentList`);
 }
 
 export function saveAgent(agent: AgentType) {
-  return request<Result<any>>('/webapp/api/chat/agent', {
+  return request<Result<any>>(`${process.env.CHAT_API_BASE_URL}agent`, {
     method: agent?.id ? 'PUT' : 'POST',
     data: { ...agent, status: agent.status !== undefined ? agent.status : 1 },
   });
 }
 
 export function deleteAgent(id: number) {
-  return request<Result<any>>(`/webapp/api/chat/agent/${id}`, {
+  return request<Result<any>>(`${process.env.CHAT_API_BASE_URL}agent/${id}`, {
     method: 'DELETE',
   });
 }
 
 export function getModelList() {
-  return request<Result<ModelType[]>>('/webapp/api/chat/conf/getDomainDataSetTree', {
+  return request<Result<ModelType[]>>(`${process.env.CHAT_API_BASE_URL}conf/getDomainDataSetTree`, {
     method: 'GET',
   });
 }
 
 export function getMetricList(modelId: number) {
-  return request<Result<{ list: MetricType[] }>>('/webapp/api/semantic/metric/queryMetric', {
+  return request<Result<{ list: MetricType[] }>>(`${process.env.API_BASE_URL}metric/queryMetric`, {
     method: 'POST',
     data: {
       modelIds: [modelId],
@@ -42,7 +42,7 @@ export function getMemeoryList(data: {
   pageSize: number;
 }) {
   const { agentId, chatMemoryFilter, current, pageSize } = data;
-  return request<Result<{ list: MetricType[] }>>('/webapp/api/chat/memory/pageMemories', {
+  return request<Result<{ list: MetricType[] }>>(`${process.env.CHAT_API_BASE_URL}memory/pageMemories`, {
     method: 'POST',
     data: {
       ...data,
@@ -56,14 +56,14 @@ export function getMemeoryList(data: {
 }
 
 export function saveMemory(data: MemoryType) {
-  return request<Result<string>>('/webapp/api/chat/memory/updateMemory', {
+  return request<Result<string>>(`${process.env.CHAT_API_BASE_URL}memory/updateMemory`, {
     method: 'POST',
     data,
   });
 }
 
 export function batchDeleteMemory(ids: number[]) {
-  return request<Result<string>>('/webapp/api/chat/memory/batchDelete', {
+  return request<Result<string>>(`${process.env.CHAT_API_BASE_URL}memory/batchDelete`, {
     method: 'POST',
     data: { ids },
   });
@@ -76,7 +76,7 @@ export function getToolTypes(): Promise<any> {
 }
 
 export function createMemory(data: any) {
-  return request<Result<string>>('/webapp/api/chat/memory/createMemory', {
+  return request<Result<string>>(`${process.env.CHAT_API_BASE_URL}memory/createMemory`, {
     method: 'POST',
     data,
   });
