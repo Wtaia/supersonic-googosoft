@@ -121,30 +121,34 @@ const Conversation: ForwardRefRenderFunction<any, Props> = (
   return (
     <div className={conversationClass}>
       <div className={styles.rightSection}>
-        <div className={styles.titleBar}>
-          <div className={styles.title}>历史对话</div>
-          <div className={styles.rightOperation}>
-            <div
-              className={styles.newConversation}
-              onClick={() => {
-                addConversation();
-              }}
-            >
-              新对话
-            </div>
-            <CloseOutlined className={styles.closeIcon} onClick={onCloseConversation} />
-          </div>
-        </div>
-        <div className={styles.searchConversation}>
-          <Input
-            placeholder="搜索"
-            prefix={<SearchOutlined className={styles.searchIcon} />}
-            className={styles.searchTask}
-            value={searchValue}
-            onChange={onSearchValueChange}
-            allowClear
-          />
-        </div>
+        {historyVisible && (
+            <>
+              <div className={styles.titleBar}>
+                <div className={styles.title}>历史对话</div>
+                <div className={styles.rightOperation}>
+                  <div
+                      className={styles.newConversation}
+                      onClick={() => {
+                        addConversation();
+                      }}
+                  >
+                    新对话
+                  </div>
+                  <CloseOutlined className={styles.closeIcon} onClick={onCloseConversation} />
+                </div>
+              </div>
+              <div className={styles.searchConversation}>
+                <Input
+                    placeholder="搜索"
+                    prefix={<SearchOutlined className={styles.searchIcon} />}
+                    className={styles.searchTask}
+                    value={searchValue}
+                    onChange={onSearchValueChange}
+                    allowClear
+                />
+              </div>
+            </>
+        )}
         <div className={styles.conversationList}>
           {conversations
             .filter(

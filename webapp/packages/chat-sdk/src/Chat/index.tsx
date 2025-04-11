@@ -386,13 +386,21 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
     <ConfigProvider locale={locale}>
       <div className={chatClass}>
         <div className={styles.chatSection}>
-          {!isMobile && agentList.length > 1 && agentListVisible && (
-            <AgentList
-              agentList={agentList}
+          {/*{!isMobile && agentList.length > 1 && agentListVisible && (*/}
+          {/*  <AgentList*/}
+          {/*    agentList={agentList}*/}
+          {/*    currentAgent={currentAgent}*/}
+          {/*    onSelectAgent={onSelectAgent}*/}
+          {/*  />*/}
+          {/*)}*/}
+          <Conversation
               currentAgent={currentAgent}
-              onSelectAgent={onSelectAgent}
-            />
-          )}
+              currentConversation={currentConversation}
+              historyVisible={historyVisible}
+              onSelectConversation={onSelectConversation}
+              onCloseConversation={onCloseConversation}
+              ref={conversationRef}
+          />
           <div className={styles.chatApp}>
             {currentConversation && (
               <div className={styles.chatBody}>
@@ -465,14 +473,6 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
               </div>
             )}
           </div>
-          <Conversation
-            currentAgent={currentAgent}
-            currentConversation={currentConversation}
-            historyVisible={historyVisible}
-            onSelectConversation={onSelectConversation}
-            onCloseConversation={onCloseConversation}
-            ref={conversationRef}
-          />
           {currentAgent &&
             (isMobile ? (
               <Drawer

@@ -1,11 +1,11 @@
 import IconFont from '../../components/IconFont';
 import { getTextWidth, groupByColumn, isMobile } from '../../utils/utils';
-import { AutoComplete, Select, Tag } from 'antd';
+import {AutoComplete, Dropdown, Select, Tag} from 'antd';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import type { ForwardRefRenderFunction } from 'react';
-import { SemanticTypeEnum, SEMANTIC_TYPE_MAP, HOLDER_TAG } from '../constants';
+import {SemanticTypeEnum, SEMANTIC_TYPE_MAP, HOLDER_TAG, AGENT_ICONS} from '../constants';
 import { AgentType, ModelType } from '../type';
 import { searchRecommend } from '../../service';
 import styles from './style.module.less';
@@ -325,15 +325,15 @@ const ChatFooter: ForwardRefRenderFunction<any, Props> = (
   return (
     <div className={chatFooterClass}>
       <div className={styles.tools}>
-        <div
-          className={styles.toolItem}
-          onClick={() => {
-            onAddConversation();
-          }}
-        >
-          <IconFont type="icon-c003xiaoxiduihua" className={styles.toolIcon} />
-          <div>新对话</div>
-        </div>
+        {/*<div*/}
+        {/*  className={styles.toolItem}*/}
+        {/*  onClick={() => {*/}
+        {/*    onAddConversation();*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  <IconFont type="icon-c003xiaoxiduihua" className={styles.toolIcon} />*/}
+        {/*  <div>新对话</div>*/}
+        {/*</div>*/}
         {!isMobile && (
           <div className={styles.toolItem} onClick={onToggleHistoryVisible}>
             <IconFont type="icon-lishi" className={styles.toolIcon} />
@@ -341,9 +341,40 @@ const ChatFooter: ForwardRefRenderFunction<any, Props> = (
           </div>
         )}
         {agentList?.length > 1 && (
-          <div className={styles.toolItem} onClick={onOpenAgents}>
+          <div className={styles.toolItem}>
             <IconFont type="icon-zhinengzhuli" className={styles.toolIcon} />
-            <div>智能助理</div>
+            <Dropdown
+                menu={{
+                  items: agentList.map((agent,index) => ({ key: agent.id, label: (
+                        <div style={{ display: 'flex', alignItems: 'center', height: '50px' }}>
+                          <IconFont
+                              type={AGENT_ICONS[index % AGENT_ICONS.length]}
+                              style={{ marginRight: '10px', fontSize: '40px'}}
+                          />
+                          <div>
+                            {agent.name}
+                          </div>
+                        </div>
+                    ), value: agent })),
+                  selectable: true,
+                  defaultSelectedKeys: [currentAgent?.id as unknown as string],
+                  onClick: ({key}) => {
+                    const agent = agentList.find(value => value.id as unknown as string == key);
+                    if (agent) {
+                      onSelectAgent(agent);
+                    }
+                  },
+                  style: {
+                    position: 'relative',
+                    width: '300px',
+                    borderRadius: '4px'
+                  },
+                }}
+                placement="top"
+                arrow={true}
+            >
+              <div>智能助理</div>
+            </Dropdown>
           </div>
         )}
         <div className={styles.toolItem} onClick={onOpenShowcase}>
