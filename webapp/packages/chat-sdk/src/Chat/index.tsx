@@ -404,7 +404,7 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
           <div className={styles.chatApp}>
             {currentConversation && (
               <div className={styles.chatBody}>
-                <div className={styles.chatContent} style={{width: '65%',marginLeft: 'auto',marginRight: 'auto'}}>
+                <div className={styles.chatContent} style={{width: '73%', marginLeft: 'auto', marginRight:'auto'}}>
                   {/*{currentAgent && !isMobile && !noInput && (*/}
                   {/*  <div className={styles.chatHeader}>*/}
                   {/*    <Row style={{ width: '100%' }}>*/}

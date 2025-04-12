@@ -454,8 +454,8 @@ const ChatItem: React.FC<Props> = ({
   return (
     <ChartItemContext.Provider value={{ register, call }}>
       <div className={prefixCls}>
-        {!isMobile && <img src={"/webapp/star.a9f7f365.svg"} style={{height: 40, width:40, marginRight:10}} alt="智能问数"/>}
-        <div className={isMobile ? `${prefixCls}-mobile-msg-card` : ''}>
+        {!isMobile && <img src={"/webapp/star.a9f7f365.svg"} style={{width:'4%'}} alt="智能问数"/>}
+        <div className={isMobile ? `${prefixCls}-mobile-msg-card` : ''} style={{width: '94.5%', float:"right"}}>
           <div className={`${prefixCls}-time`}>
             {parseTimeCost?.parseStartTime
               ? dayjs(parseTimeCost.parseStartTime).format('M月D日 HH:mm')

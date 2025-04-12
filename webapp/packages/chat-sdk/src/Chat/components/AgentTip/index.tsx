@@ -14,7 +14,7 @@ const AgentTip: React.FC<Props> = ({ currentAgent, onSendMsg }) => {
     return null;
   }
   return (
-    <div className={styles.agentTip}>
+    <div className={styles.agentTip} style={{width: '100%'}}>
       {!isMobile && <LeftAvatar />}
       <Message position="left" bubbleClassName={styles.agentTipMsg}>
         <div className={styles.title}>
