@@ -404,33 +404,33 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
           <div className={styles.chatApp}>
             {currentConversation && (
               <div className={styles.chatBody}>
-                <div className={styles.chatContent}>
-                  {currentAgent && !isMobile && !noInput && (
-                    <div className={styles.chatHeader}>
-                      <Row style={{ width: '100%' }}>
-                        <Col flex="1 1 200px">
-                          <Space>
-                            <div className={styles.chatHeaderTitle}>{currentAgent.name}</div>
-                            <div className={styles.chatHeaderTip}>{currentAgent.description}</div>
-                            <Tooltip title="精简模式下，问答结果将以文本形式输出">
-                              <Switch
-                                key={currentAgent.id}
-                                style={{ position: 'relative', top: -1 }}
-                                size="small"
-                                value={isSimpleMode}
-                                checkedChildren="精简模式"
-                                unCheckedChildren="精简模式"
-                                onChange={checked => {
-                                  setIsSimpleMode(checked);
-                                }}
-                              />
-                            </Tooltip>
-                          </Space>
-                        </Col>
-                        <Col flex="0 1 118px"></Col>
-                      </Row>
-                    </div>
-                  )}
+                <div className={styles.chatContent} style={{width: '65%',marginLeft: 'auto',marginRight: 'auto'}}>
+                  {/*{currentAgent && !isMobile && !noInput && (*/}
+                  {/*  <div className={styles.chatHeader}>*/}
+                  {/*    <Row style={{ width: '100%' }}>*/}
+                  {/*      <Col flex="1 1 200px">*/}
+                  {/*        <Space>*/}
+                  {/*          <div className={styles.chatHeaderTitle}>{currentAgent.name}</div>*/}
+                  {/*          <div className={styles.chatHeaderTip}>{currentAgent.description}</div>*/}
+                  {/*          <Tooltip title="精简模式下，问答结果将以文本形式输出">*/}
+                  {/*            <Switch*/}
+                  {/*              key={currentAgent.id}*/}
+                  {/*              style={{ position: 'relative', top: -1 }}*/}
+                  {/*              size="small"*/}
+                  {/*              value={isSimpleMode}*/}
+                  {/*              checkedChildren="精简模式"*/}
+                  {/*              unCheckedChildren="精简模式"*/}
+                  {/*              onChange={checked => {*/}
+                  {/*                setIsSimpleMode(checked);*/}
+                  {/*              }}*/}
+                  {/*            />*/}
+                  {/*          </Tooltip>*/}
+                  {/*        </Space>*/}
+                  {/*      </Col>*/}
+                  {/*      <Col flex="0 1 118px"></Col>*/}
+                  {/*    </Row>*/}
+                  {/*  </div>*/}
+                  {/*)}*/}
                   <MessageContainer
                     id="messageContainer"
                     isSimpleMode={isSimpleMode}
