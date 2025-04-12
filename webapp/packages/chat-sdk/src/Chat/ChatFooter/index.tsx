@@ -373,7 +373,7 @@ const ChatFooter: ForwardRefRenderFunction<any, Props> = (
                 placement="top"
                 arrow={true}
             >
-              <div>智能助理</div>
+              <div>{currentAgent?.name}</div>
             </Dropdown>
           </div>
         )}
@@ -388,7 +388,7 @@ const ChatFooter: ForwardRefRenderFunction<any, Props> = (
             className={styles.composerInput}
             placeholder={
               currentAgent
-                ? `【${currentAgent.name}】将与您对话，点击${!isMobile ? '左侧' : ''}【智能助理】${
+                ? `【${currentAgent.name}】将与您对话，点击${!isMobile ? '上方' : ''}【智能助理】${
                     !isMobile ? '列表' : ''
                   }可切换`
                 : '请输入您的问题'
