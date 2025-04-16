@@ -15,7 +15,8 @@ public class SqlDialectFactory {
     public static final Context DEFAULT_CONTEXT =
             SqlDialect.EMPTY_CONTEXT.withDatabaseProduct(DatabaseProduct.BIG_QUERY)
                     .withLiteralQuoteString("'").withLiteralEscapedQuoteString("''")
-                    .withIdentifierQuoteString("`").withUnquotedCasing(Casing.UNCHANGED)
+//                    .withIdentifierQuoteString("`")
+                    .withUnquotedCasing(Casing.UNCHANGED)
                     .withQuotedCasing(Casing.UNCHANGED).withCaseSensitive(false);
     public static final Context POSTGRESQL_CONTEXT = SqlDialect.EMPTY_CONTEXT
             .withDatabaseProduct(DatabaseProduct.BIG_QUERY).withLiteralQuoteString("'")

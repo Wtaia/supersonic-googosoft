@@ -34,7 +34,8 @@ public class FieldAliasReplaceWithBackticksVisitor extends SelectItemVisitorAdap
         if (aliasName.startsWith("`") && aliasName.endsWith("`")) {
             return "";
         }
-        return "`" + aliasName + "`";
+//        return "`" + aliasName + "`";
+        return aliasName;
     }
 
     public Map<String, String> getFieldAliasReplacedMap() {
