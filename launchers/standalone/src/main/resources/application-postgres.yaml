@@ -1,14 +1,25 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${S2_DB_HOST:172.20.228.77}:${S2_DB_PORT:8003},${S2_DB_HOST2:172.20.228.77}:${S2_DB_PORT2:8004},${S2_DB_HOST3:172.20.228.77}:${S2_DB_PORT3:8005}/${S2_DB_DATABASE:xzzc0824}?batchMode=on&stringtype=unspecified
+    url: jdbc:postgresql://${S2_DB_HOST:172.20.228.77}:${S2_DB_PORT:8003}/${S2_DB_DATABASE:xzzc0824}
     username: ${S2_DB_USER:ywjm}
     password: ${S2_DB_PASSWORD:ywjm0228@}
   sql:
     init:
       continue-on-error: true
-      mode: never
+      mode: always
       username: ${S2_DB_USER:ywjm}
       password: ${S2_DB_PASSWORD:ywjm0228@}
       schema-locations: classpath:db/schema-postgres.sql
       data-locations: classpath:db/data-postgres.sql
+s2:
+  embedding:
+    store:
+      provider: PGVECTOR
+      base:
+        url: ${S2_DB_HOST:127.0.0.1}
+      port: ${S2_DB_PORT:5432}
+      databaseName: ${S2_DB_DATABASE:postgres}
+      user: ${S2_DB_USER:postgres}
+      password: ${S2_DB_PASSWORD:postgres}
+      dimension: 512
