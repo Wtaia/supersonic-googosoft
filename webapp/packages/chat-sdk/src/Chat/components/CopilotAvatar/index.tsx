@@ -5,7 +5,7 @@ import React from "react";
 
 const CopilotAvatar = () => {
   // return <IconFont type="icon-zhinengsuanfa" className={styles.leftAvatar} />;
-  return <img src={"/webapp/star.a9f7f365.svg"} style={{width:'4%'}} alt="智能问数"/>;
+  return <img src={"/webapp/fo-sd4.png"} style={{width:'4%'}} alt="智能问数"/>;
 };
 
 export default CopilotAvatar;
