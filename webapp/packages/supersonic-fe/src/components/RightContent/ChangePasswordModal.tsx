@@ -86,6 +86,10 @@ const ChangePasswordModal = forwardRef<IRef>((_, ref) => {
               max: 10,
               message: '密码须在6-10字符之间!',
             },
+            {
+              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?~`\\/\-]).{6,10}$/,
+              message: '密码必须包含大写字母、小写字母、数字和特殊字符!',
+            },
           ]}
           hasFeedback
         >
