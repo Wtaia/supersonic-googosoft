@@ -10,7 +10,7 @@ import {
 import MessageContainer from './MessageContainer';
 import styles from './style.module.less';
 import { ConversationDetailType, MessageItem, MessageTypeEnum, AgentType } from './type';
-import { queryAgentList } from './service';
+import {queryAgentList, saveConversation} from './service';
 import { useThrottleFn } from 'ahooks';
 import Conversation from './Conversation';
 import ChatFooter from './ChatFooter';
@@ -26,12 +26,14 @@ import { ConfigProvider, Drawer, Modal, Row, Col, Space, Switch, Tooltip } from 
 import locale from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
+import {DEFAULT_CONVERSATION_NAME} from "./constants";
 
 dayjs.locale('zh-cn');
 
 type Props = {
   token?: string;
   agentIds?: number[];
+  isNewConversation?: boolean;
   initialAgentId?: number;
   chatVisible?: boolean;
   noInput?: boolean;
@@ -54,6 +56,7 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
     isCopilot,
     onCurrentAgentChange,
     onReportMsgEvent,
+    isNewConversation,
   },
   ref
 ) => {
@@ -121,6 +124,10 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
     }
   };
 
+  const newConversation = async () => {
+    await saveConversation(DEFAULT_CONVERSATION_NAME, currentAgent?.id || 1);
+  }
+
   const initAgentList = async () => {
     const res = await queryAgentList();
     const agentListValue = (res.data || []).filter(
@@ -141,6 +148,12 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
   useEffect(() => {
     initAgentList();
   }, []);
+
+  useEffect( () => {
+    if (isNewConversation) {
+      newConversation();
+    }
+  }, [isNewConversation]);
 
   useEffect(() => {
     if (token) {

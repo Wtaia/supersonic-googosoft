@@ -39,7 +39,7 @@ const ChatPage = () => {
   }, [location]);
 
   return (
-    <Chat initialAgentId={agentId} token={token} isDeveloper />
+    <Chat initialAgentId={agentId} token={token} isDeveloper isNewConversation={true}/>
   );
 };
 
