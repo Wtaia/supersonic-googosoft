@@ -376,6 +376,7 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
       setMessageList([]);
     }
     updateCurrentAgent(agent);
+    newConversation();
     updateMessageContainerScroll();
   };
 

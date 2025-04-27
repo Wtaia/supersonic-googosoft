@@ -101,11 +101,12 @@ const ParseTip: React.FC<Props> = ({
     return (
       <div className={`${prefixCls}-parse-tip`}>
         <div className={`${prefixCls}-title-bar`}>
-          {!failed ? (
-            <CheckCircleFilled className={`${prefixCls}-step-icon`} />
-          ) : (
-            <CloseCircleFilled className={`${prefixCls}-step-error-icon`} />
-          )}
+          <CheckCircleFilled className={`${prefixCls}-step-icon`} />
+          {/*{!failed ? (*/}
+          {/*  <CheckCircleFilled className={`${prefixCls}-step-icon`} />*/}
+          {/*) : (*/}
+          {/*  <CloseCircleFilled className={`${prefixCls}-step-error-icon`} />*/}
+          {/*)}*/}
           <div className={`${prefixCls}-step-title`}>
             {tipTitle}
             {tipNode === undefined && <Loading />}
@@ -133,7 +134,7 @@ const ParseTip: React.FC<Props> = ({
   if (parseTip) {
     return getNode(
       <>
-        意图解析失败
+        意图解析
         {!!parseTimeCost && isDeveloper && (
           <span className={`${prefixCls}-title-tip`}>(耗时: {parseTimeCost}ms)</span>
         )}

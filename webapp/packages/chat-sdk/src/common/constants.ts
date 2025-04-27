@@ -55,14 +55,14 @@ export const THEME_COLOR_LIST = [
   '#5CA9E6',
 ];
 
-export const PARSE_ERROR_TIP = '智能助理不太懂您说什么呐，回去一定补充知识';
+export const PARSE_ERROR_TIP = '抱歉，暂未找到精准匹配此问题的答案，请尝试更换提问方式，我们将继续完善提升';
 
 export const SEARCH_EXCEPTION_TIP =
   '查询出错啦，数据库可能出现异常或者负载繁忙，请联系管理员或者稍后重试';
 
 export const MSG_VALID_TIP = {
   [MsgValidTypeEnum.SEARCH_EXCEPTION]: '数据查询异常',
-  [MsgValidTypeEnum.INVALID]: '智能助理不太懂您说什么呐，回去一定补充知识',
+  [MsgValidTypeEnum.INVALID]: '抱歉，暂未找到精准匹配此问题的答案，请尝试更换提问方式，我们将继续完善提升',
 };
 
 export const PREFIX_CLS = 'ss-chat';
