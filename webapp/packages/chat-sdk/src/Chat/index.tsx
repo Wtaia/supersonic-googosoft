@@ -147,13 +147,14 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
 
   useEffect(() => {
     initAgentList();
+    newConversation();
   }, []);
 
-  useEffect( () => {
-    if (isNewConversation) {
-      newConversation();
-    }
-  }, [isNewConversation]);
+  // useEffect( () => {
+  //   if (isNewConversation) {
+  //     newConversation();
+  //   }
+  // }, [isNewConversation]);
 
   useEffect(() => {
     if (token) {
