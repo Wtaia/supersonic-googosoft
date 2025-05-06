@@ -50,7 +50,7 @@ public class ChatManageServiceImpl implements ChatManageService {
         chatDO.setCreateTime(getCurrentTime());
         chatDO.setIsDelete(0);
         chatDO.setLastTime(getCurrentTime());
-        chatDO.setLastQuestion("Hello, welcome to using supersonic");
+        chatDO.setLastQuestion("您好，欢迎使用智能问数！");
         chatDO.setIsTop(0);
         chatDO.setAgentId(agentId);
         return chatRepository.createChat(chatDO);

@@ -122,6 +122,7 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
     if (!isCopilot) {
       window.history.replaceState({}, '', `${window.location.pathname}?agentId=${agent?.id}`);
     }
+    newConversation();
   };
 
   const newConversation = async () => {
