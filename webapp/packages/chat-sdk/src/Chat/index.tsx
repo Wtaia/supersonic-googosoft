@@ -112,6 +112,18 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
     }
   };
 
+  useEffect(() => {
+    if (currentAgent?.id) {
+      newConversation();
+    }
+  }, [currentAgent?.id]);
+
+  const newConversation = async () => {
+    debugger
+    if (!currentAgent) return;
+    await saveConversation(DEFAULT_CONVERSATION_NAME, currentAgent.id);
+  };
+
   const updateCurrentAgent = (agent?: AgentType) => {
     setCurrentAgent(agent);
     onCurrentAgentChange?.(agent);
@@ -122,14 +134,7 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
     if (!isCopilot) {
       window.history.replaceState({}, '', `${window.location.pathname}?agentId=${agent?.id}`);
     }
-    newConversation();
   };
-
-  const newConversation = async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const agentId = urlParams.get('agentId');
-    await saveConversation(DEFAULT_CONVERSATION_NAME, currentAgent?.id || (agentId ? Number(agentId) : 1));
-  }
 
   const initAgentList = async () => {
     const res = await queryAgentList();
@@ -150,7 +155,6 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
 
   useEffect(() => {
     initAgentList();
-    newConversation();
   }, []);
 
   // useEffect( () => {
