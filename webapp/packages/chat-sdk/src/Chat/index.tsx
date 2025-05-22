@@ -126,7 +126,9 @@ const Chat: ForwardRefRenderFunction<any, Props> = (
   };
 
   const newConversation = async () => {
-    await saveConversation(DEFAULT_CONVERSATION_NAME, currentAgent?.id || 1);
+    const urlParams = new URLSearchParams(window.location.search);
+    const agentId = urlParams.get('agentId');
+    await saveConversation(DEFAULT_CONVERSATION_NAME, currentAgent?.id || agentId);
   }
 
   const initAgentList = async () => {
