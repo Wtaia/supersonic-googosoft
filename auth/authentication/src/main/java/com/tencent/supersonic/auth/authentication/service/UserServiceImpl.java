@@ -74,6 +74,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUser(long userId) {
+        ComponentFactory.getUserAdaptor().deleteUser(userId);
+    }
+
+    @Override
     public String login(UserReq userReq, HttpServletRequest request) {
         if (StringUtils.isNotBlank(userReq.getAuthKey())) {
 //            String authKey = Arrays.toString(Base64.getDecoder().decode(userReq.getAuthKey()));
