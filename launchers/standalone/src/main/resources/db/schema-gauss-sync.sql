@@ -11,7 +11,7 @@ INSERT INTO s2_model (NAME,
                       status,
                       description,
                       viewer,
-                      AD    MIN,
+                      ADMIN,
                       created_by,
                       created_at,
                       updated_by,
@@ -73,7 +73,7 @@ INSERT INTO s2_metric (NAME,
                        model_id_char,
                        model_id)
 SELECT indicator_name,
-       indicator_measure_column,
+       indicator_code,
        '',
        case
            when is_deleted = 0 then 1
