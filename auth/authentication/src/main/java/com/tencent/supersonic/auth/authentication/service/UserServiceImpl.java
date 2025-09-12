@@ -1,5 +1,7 @@
 package com.tencent.supersonic.auth.authentication.service;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.tencent.supersonic.auth.api.authentication.pojo.Organization;
 import com.tencent.supersonic.auth.api.authentication.pojo.UserToken;
 import com.tencent.supersonic.auth.api.authentication.request.UserReq;
@@ -9,17 +11,19 @@ import com.tencent.supersonic.auth.authentication.utils.ComponentFactory;
 import com.tencent.supersonic.common.config.SystemConfig;
 import com.tencent.supersonic.common.pojo.User;
 import com.tencent.supersonic.common.service.SystemConfigService;
+import com.tencent.supersonic.common.util.HttpUtils;
+import com.tencent.supersonic.common.util.JsonUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -81,11 +85,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public String login(UserReq userReq, HttpServletRequest request) {
         if (StringUtils.isNotBlank(userReq.getAuthKey())) {
-//            String authKey = Arrays.toString(Base64.getDecoder().decode(userReq.getAuthKey()));
             String authKey = userReq.getAuthKey();
-            if (StringUtils.isNotBlank(authKey) && authKey.contains("googoSoft")) {
-                UserToken userToken = ComponentFactory.getUserAdaptor().getUserToken(1L);
-                return userToken.getToken();
+            if (StringUtils.isNotBlank(authKey)) {
+                // 请求ssoLogin接口获取登录用户
+                String userId = null;
+                try {
+                    HashMap<String, String> headers = new HashMap<>();
+                    headers.put("authorization", authKey);
+                    String res = HttpUtils.get("http://xzzc.sdcxzc.cn/prod-api/system/user/profile/getSsoUser", headers);
+                    JSONObject jsonObject = JSON.parseObject(res);
+                    userId = jsonObject.getJSONObject("data").getJSONObject("loginUser").getJSONObject("sysUser").getString("userId");
+                } catch (Exception e) {
+                    log.error("单点登陆失败: {}",e.getMessage());
+                }
+                if (StringUtils.isNotBlank(userId)) {
+                    UserToken userToken = ComponentFactory.getUserAdaptor().getUserToken(1L);
+                    return userToken.getToken();
+                }
             }
         }
         return ComponentFactory.getUserAdaptor().login(userReq, request);

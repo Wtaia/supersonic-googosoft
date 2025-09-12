@@ -119,15 +119,6 @@ const LoginPage: React.FC = () => {
                 <Button className={styles.signInBtn} type="primary" onClick={handleLogin}>
                   登录
                 </Button>
-
-                <div className={styles.tool}>
-                  <Button className={styles.button} onClick={handleRegisterBtn}>
-                    注册
-                  </Button>
-                  {/* <Button className={styles.button} type="link" onClick={handleForgetPwdBtn}>
-              忘记密码
-            </Button> */}
-                </div>
               </div>
             </Form>
           </div>
