@@ -21,6 +21,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Slf4j
@@ -91,7 +94,7 @@ public class UserServiceImpl implements UserService {
                 String userId = null;
                 try {
                     HashMap<String, String> headers = new HashMap<>();
-                    headers.put("authorization", authKey);
+                    headers.put("authorization", "Bearer " + authKey);
                     String res = HttpUtils.get("http://xzzc.sdcxzc.cn/prod-api/system/user/profile/getSsoUser", headers);
                     JSONObject jsonObject = JSON.parseObject(res);
                     userId = jsonObject.getJSONObject("data").getJSONObject("loginUser").getJSONObject("sysUser").getString("userId");

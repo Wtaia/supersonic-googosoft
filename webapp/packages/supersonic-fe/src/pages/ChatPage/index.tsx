@@ -30,8 +30,8 @@ const ChatPage = () => {
         try {
           const authKey = path.substring(path.indexOf('-') + 1);
           const newToken = await postUserLogin({ authKey });
-          localStorage.setItem(AUTH_TOKEN_KEY, newToken);
-          setToken(newToken);
+          localStorage.setItem(AUTH_TOKEN_KEY, newToken.data);
+          setToken(newToken.data);
         } catch (error) {
           console.error("Error during login request:", error);
         }
