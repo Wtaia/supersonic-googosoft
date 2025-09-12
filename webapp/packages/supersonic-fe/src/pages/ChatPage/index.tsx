@@ -3,17 +3,17 @@ import { useLocation } from '@umijs/max';
 import { getToken } from '@/utils/utils';
 import queryString from 'query-string';
 import { Chat } from 'supersonic-chat-sdk';
-import { AUTH_TOKEN_KEY } from "@/common/constants";
-import { postUserLogin } from "@/pages/Login/services";
+import { AUTH_TOKEN_KEY } from '@/common/constants';
+import { postUserLogin } from '@/pages/Login/services';
 
 const ChatPage = () => {
   const location = useLocation();
-  const [agentId, setAgentId] = useState(undefined);
-  const [token, setToken] = useState(getToken() || '');
+  const [agentId, setAgentId] = useState<number | undefined>(undefined);
+  const [token, setToken] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true); // 控制是否完成初始化
 
   useEffect(() => {
-//     const publicKey = 'eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl91c2VyX2VtYWlsIjoiYWRtaW5AeHguY29tIiwidG9rZW5fdXNlcl9pZCI6MSwidG9rZW5fdXNlcl9kaXNwbGF5X25hbWUiOiJhZG1pbiIsInRva2VuX2NyZWF0ZV90aW1lIjoxNzQ0OTU0NTYxMDQxLCJ0b2tlbl9pc19hZG1pbiI6MSwidG9rZW5fdXNlcl9uYW1lIjoiYWRtaW4iLCJ0b2tlbl91c2VyX3Bhc3N3b3JkIjoiYzNWd1pYSnpiMjVwWTBCaWFXTnZiZGt0SkpZV3c2QTNyRW1CVVB6Ym4vNkROZVluRCt5M21Bd0RLRU1TM0tWVCIsInN1YiI6ImFkbWluIiwiZXhwIjoxODQ2MDIyMzk5fQ.nz_PRQScrEdctGU0uu0_s72umns4JLuZ5AdU-baflbUEsuzOi0p1kPStOw6bfRkMC84Li_ljIbNfPgE93hJyYQ';
-    const query = queryString.parse(location.search) || {};
+    const query = queryString.parse(location.search);
     const { agentId } = query;
 
     if (agentId) {
@@ -22,25 +22,32 @@ const ChatPage = () => {
 
     let paths = window.location.pathname.split('/');
     let path = paths[paths.length - 1];
-    if (path.includes('auth-')) {
-      const fetchToken = async () => {
+    const hasAuthPath = path.includes('auth-');
+
+    // 封装 token 初始化逻辑
+    const initializeToken = async () => {
+      if (hasAuthPath) {
         try {
-          let newVar = await postUserLogin({ authKey: path.substring(path.indexOf('-') + 1) });
-          localStorage.setItem(AUTH_TOKEN_KEY, newVar);
-          setToken(newVar);
+          const authKey = path.substring(path.indexOf('-') + 1);
+          const newToken = await postUserLogin({ authKey });
+          localStorage.setItem(AUTH_TOKEN_KEY, newToken);
+          setToken(newToken);
         } catch (error) {
           console.error("Error during login request:", error);
         }
-      };
-      await fetchToken();
-      localStorage.setItem(AUTH_TOKEN_KEY, publicKey);
-      setToken(publicKey);
-    }
+      }
+      // 无论哪种情况，初始化完成
+      setLoading(false);
+    };
+    initializeToken();
   }, [location]);
 
-  return (
-    <Chat initialAgentId={agentId} token={token} isDeveloper isNewConversation={true}/>
-  );
+  if (loading) {
+    // 可以返回一个 loading 界面
+    return <div>Loading...</div>;
+  }
+
+  return <Chat initialAgentId={agentId} token={token} isDeveloper isNewConversation={true} />;
 };
 
 export default ChatPage;
