@@ -1,50 +1,74 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from '@umijs/max';
-import { getToken } from '@/utils/utils';
+import {useEffect, useState} from 'react';
+import {history, useLocation} from '@umijs/max';
 import queryString from 'query-string';
-import { Chat } from 'supersonic-chat-sdk';
-import { AUTH_TOKEN_KEY } from '@/common/constants';
-import { postUserLogin } from '@/pages/Login/services';
+import {Chat} from 'supersonic-chat-sdk';
+import {AUTH_TOKEN_KEY} from '@/common/constants';
+import {postUserLogin} from '@/pages/Login/services';
+import {Spin, Typography} from 'antd';
+
+const { Text } = Typography;
 
 const ChatPage = () => {
   const location = useLocation();
   const [agentId, setAgentId] = useState<number | undefined>(undefined);
   const [token, setToken] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(true); // 控制是否完成初始化
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const query = queryString.parse(location.search);
-    const { agentId } = query;
+    const { agentId: agentIdParam } = query;
 
-    if (agentId) {
-      setAgentId(+agentId);
+    if (agentIdParam) {
+      setAgentId(+agentIdParam);
     }
+    const paths = location.pathname.split('/');
+    const lastPath = paths[paths.length - 1];
+    const hasAuthPath = lastPath.includes('auth-');
 
-    let paths = window.location.pathname.split('/');
-    let path = paths[paths.length - 1];
-    const hasAuthPath = path.includes('auth-');
+    const cleanedPathname = hasAuthPath
+      ? location.pathname.replace(/\/auth-[^\/]+$/, '')
+      : location.pathname;
 
-    // 封装 token 初始化逻辑
     const initializeToken = async () => {
       if (hasAuthPath) {
         try {
-          const authKey = path.substring(path.indexOf('-') + 1);
-          const newToken = await postUserLogin({ authKey });
-          localStorage.setItem(AUTH_TOKEN_KEY, newToken.data);
-          setToken(newToken.data);
+          const authKey = lastPath.substring(lastPath.indexOf('-') + 1);
+          const response = await postUserLogin({ authKey });
+          const newToken = response.data;
+          localStorage.setItem(AUTH_TOKEN_KEY, newToken);
+          setToken(newToken);
         } catch (error) {
-          console.error("Error during login request:", error);
+          console.error('Error during login request:', error);
         }
       }
-      // 无论哪种情况，初始化完成
+
+      history.replace({
+        pathname: cleanedPathname,
+        search: location.search,
+      });
+
       setLoading(false);
     };
     initializeToken();
   }, [location]);
 
   if (loading) {
-    // 可以返回一个 loading 界面
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <Spin size="large" />
+        <Text type="secondary" style={{ marginTop: 16 }}>
+          正在登录...
+        </Text>
+      </div>
+    );
   }
 
   return <Chat initialAgentId={agentId} token={token} isDeveloper isNewConversation={true} />;
