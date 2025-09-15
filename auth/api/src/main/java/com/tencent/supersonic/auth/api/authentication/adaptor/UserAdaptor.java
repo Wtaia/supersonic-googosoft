@@ -13,6 +13,8 @@ import java.util.Set;
 /** UserAdaptor defines some interfaces for obtaining user and organization information */
 public interface UserAdaptor {
 
+    User getUserById(Long userId);
+
     List<String> getUserNames();
 
     List<User> getUserList();

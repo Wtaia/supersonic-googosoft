@@ -35,10 +35,17 @@ const ChatPage = () => {
           const authKey = lastPath.substring(lastPath.indexOf('-') + 1);
           const response = await postUserLogin({ authKey });
           const newToken = response.data;
+          if (!newToken || newToken == '') {
+            throw new Error();
+          }
           localStorage.setItem(AUTH_TOKEN_KEY, newToken);
           setToken(newToken);
         } catch (error) {
+          localStorage.removeItem(AUTH_TOKEN_KEY);
+          window.location.href = 'http://sjzt.sdcxzc.cn/login';
           console.error('Error during login request:', error);
+        } finally {
+          setLoading(false);
         }
       }
 

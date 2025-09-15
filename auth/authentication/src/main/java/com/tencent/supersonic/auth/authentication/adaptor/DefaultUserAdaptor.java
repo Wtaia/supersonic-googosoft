@@ -41,6 +41,12 @@ public class DefaultUserAdaptor implements UserAdaptor {
     }
 
     @Override
+    public User getUserById(Long userId) {
+        UserRepository userRepository = ContextUtils.getBean(UserRepository.class);
+        return this.convert(userRepository.getUserById(userId));
+    }
+
+    @Override
     public List<String> getUserNames() {
         return getUserDOList().stream().map(UserDO::getName).collect(Collectors.toList());
     }

@@ -194,13 +194,13 @@ const ROUTES = [
     ],
   },
 
-  {
-    path: '/login',
-    name: 'login',
-    layout: false,
-    hideInMenu: true,
-    component: './Login',
-  },
+  // {
+  //   path: '/login',
+  //   name: 'login',
+  //   layout: false,
+  //   hideInMenu: true,
+  //   component: './Login',
+  // },
   {
     path: '/database',
     name: 'database',

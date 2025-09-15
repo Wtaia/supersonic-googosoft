@@ -49,6 +49,15 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public UserDO getUserById(Long userId) {
+        UserDOExample userDOExample = new UserDOExample();
+        userDOExample.createCriteria().andIdEqualTo(userId);
+        List<UserDO> userDOS = userDOMapper.selectByExample(userDOExample);
+        Optional<UserDO> userDOOptional = userDOS.stream().findFirst();
+        return userDOOptional.orElse(null);
+    }
+
+    @Override
     public List<UserTokenDO> getUserTokenListByName(String userName) {
         QueryWrapper<UserTokenDO> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(UserTokenDO::getUserName, userName);

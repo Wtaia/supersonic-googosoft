@@ -13,7 +13,7 @@ public class DbParameterFactory {
         parametersBuilder = new LinkedHashMap<>();
         parametersBuilder.put(EngineType.H2.getName(), new H2ParametersBuilder());
         parametersBuilder.put(EngineType.CLICKHOUSE.getName(), new ClickHouseParametersBuilder());
-        parametersBuilder.put(EngineType.MYSQL.getName(), new MysqlParametersBuilder());
+//        parametersBuilder.put(EngineType.MYSQL.getName(), new MysqlParametersBuilder());
         parametersBuilder.put(EngineType.POSTGRESQL.getName(), new PostgresqlParametersBuilder());
         parametersBuilder.put(EngineType.HANADB.getName(), new HanadbParametersBuilder());
         parametersBuilder.put(EngineType.STARROCKS.getName(), new StarrocksParametersBuilder());

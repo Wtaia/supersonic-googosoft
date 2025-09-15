@@ -2,6 +2,7 @@ package com.tencent.supersonic.auth.authentication.service;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.tencent.supersonic.auth.api.authentication.adaptor.UserAdaptor;
 import com.tencent.supersonic.auth.api.authentication.pojo.Organization;
 import com.tencent.supersonic.auth.api.authentication.pojo.UserToken;
 import com.tencent.supersonic.auth.api.authentication.request.UserReq;
@@ -20,11 +21,13 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -102,8 +105,15 @@ public class UserServiceImpl implements UserService {
                     log.error("单点登陆失败: {}",e.getMessage());
                 }
                 if (StringUtils.isNotBlank(userId)) {
-                    UserToken userToken = ComponentFactory.getUserAdaptor().getUserToken(1L);
-                    return userToken.getToken();
+                    UserAdaptor userAdaptor = ComponentFactory.getUserAdaptor();
+                    User userById = userAdaptor.getUserById(Long.valueOf(userId));
+                    if (ObjectUtils.isEmpty(userById)) {
+                        UserToken userToken = userAdaptor.generateToken(String.valueOf(System.currentTimeMillis()), "admin", System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3));
+                        return userToken.getToken();
+                    } else {
+                        UserToken userToken = userAdaptor.generateToken(String.valueOf(System.currentTimeMillis()), userById.getName(), System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3));
+                        return userToken.getToken();
+                    }
                 }
             }
         }

@@ -44,7 +44,8 @@ const responseInterceptor = async (response: Response) => {
     try {
       const data: Result<any> = await response?.clone()?.json?.();
       if (Number(data.code) === 403 && !window.location.pathname.includes('external/auth-')) {
-        history.push('/login');
+        // history.push('/login');
+        window.location.href = 'http://sjzt.sdcxzc.cn/login';
         return response;
       }
     } catch (e) {}
