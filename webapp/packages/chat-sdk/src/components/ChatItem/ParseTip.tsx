@@ -83,7 +83,7 @@ const ParseTip: React.FC<Props> = ({
 
   useEffect(() => {
     if (index < loadingMsg.length) {
-      const randomInterval = [100, 200, 150][Math.floor(Math.random() * 3)];
+      const randomInterval = [100, 80, 75][Math.floor(Math.random() * 3)];
       const timeout = setTimeout(() => {
         setRenderedTitle((prev) => prev + loadingMsg[index]);
         setIndex(index + 1);
